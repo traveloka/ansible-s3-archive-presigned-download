@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Salvian Reynaldi
+  description: Download and extract an S3 archive object using pre-signed URL
+  company: 
+  license: MIT
+  min_ansible_version: 2.0
+  platforms:
+  - name: Ubuntu
+    versions:
+     - trusty
+     - xenial
+  categories:
+  - development
+  - aws
+  - s3
+  - download
+dependencies: []
