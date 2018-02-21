@@ -10,6 +10,11 @@
   register: s3_object_url
 
 - name: download and extract object
+  file:
+    path: "{{ s3_object_extract_destination }}"
+    state: directory
+
+- name: download and extract object
   unarchive:
     src: "{{ s3_object_url.url }}"
     remote_src: yes
