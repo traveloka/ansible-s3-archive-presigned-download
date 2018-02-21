@@ -4,6 +4,7 @@
     mode: geturl
     bucket: "{{ s3_object_bucket }}"
     object: "{{ s3_object_key }}"
+    ignore_nonexistent_bucket: True
   run_once: true
   delegate_to: 127.0.0.1
   register: s3_object_url
