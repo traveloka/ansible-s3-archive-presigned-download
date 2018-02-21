@@ -1,6 +1,6 @@
 ---
 - name: get object presigned url
-  s3:
+  aws_s3:
     mode: geturl
     bucket: "{{ s3_object_bucket }}"
     object: "{{ s3_object_key }}"
