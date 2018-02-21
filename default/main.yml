@@ -1,2 +1,3 @@
 ---
-s3_object_key: application.tgz
+s3_object_extension: "tgz"
+s3_object_key: "application.{{ s3_object_extension }}"
