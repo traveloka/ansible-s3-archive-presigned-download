@@ -12,4 +12,5 @@
 - name: download and extract object
   unarchive:
     src: "{{ s3_object_url.url }}"
+    remote_src: yes
     dest: "{{ s3_object_extract_destination }}"
