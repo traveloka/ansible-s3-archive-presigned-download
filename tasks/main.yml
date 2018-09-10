@@ -9,26 +9,30 @@
   delegate_to: 127.0.0.1
   register: s3_object_url
 
-- set_fact:
-    s3_tmp_file: "/tmp/{{ s3_object_url.url | to_uuid }}.{{ s3_object_extension }}"
+- block:
+  - set_fact:
+      s3_tmp_file: "/tmp/{{ s3_object_url.url | to_uuid }}.{{ s3_object_extension }}"
 
-- name: ensure the target directory exists
-  file:
-    path: "{{ s3_object_extract_destination }}"
-    state: directory
+  - name: ensure the target directory exists
+    file:
+      path: "{{ s3_object_extract_destination }}"
+      state: directory
 
-- name: download object
-  get_url:
-    url: "{{ s3_object_url.url }}"
-    dest: "{{ s3_tmp_file }}"
+  - name: download object
+    get_url:
+      url: "{{ s3_object_url.url }}"
+      dest: "{{ s3_tmp_file }}"
 
-- name: extract object
-  unarchive:
-    src: "{{ s3_tmp_file }}"
-    remote_src: yes
-    dest: "{{ s3_object_extract_destination }}"
+  - name: extract object
+    unarchive:
+      src: "{{ s3_tmp_file }}"
+      remote_src: yes
+      dest: "{{ s3_object_extract_destination }}"
 
-- name: remove temporary file
-  file:
-    path: "{{ s3_tmp_file }}"
-    state: absent
+  - name: remove temporary file
+    file:
+      path: "{{ s3_tmp_file }}"
+      state: absent
+  become: yes
+  become_method: sudo
+  become_user: root
